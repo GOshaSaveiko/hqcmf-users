@@ -1,12 +1,12 @@
 <?php
 
-class UsersModuleController extends HqController
+class usersModuleController extends HqController
 {
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
      * using two-column layout. See 'protected/views/layouts/column2.php'.
      */
-    //public $layout='//layouts/column2';
+   // public $hqLayout='/layouts/main';
 
     public function init()
     {
@@ -27,6 +27,7 @@ class UsersModuleController extends HqController
      */
     public function actionIndex()
     {
-        $this->render('index');
+
+        $this->hqRender('index',array('menu'=>"MENU"));
     }
 }
