@@ -7,7 +7,12 @@
         </div>
         <div class="span2">
         <?php
-            echo $menu;
+        $this->widget('bootstrap.widgets.TbNav',array(
+            'htmlOptions'=>array('class'=>
+                'nav-list',
+            ),
+            'items'=> $this->MenuList()
+        ));
         ?>
 </div>
     </div>

@@ -35,6 +35,20 @@ class UsersModule extends HqChildModule
             $this->assets = null;
         }
     }
-}
 
-?>
+    /**
+     * Stores task list of the module
+     * @return array
+     */
+    public function taskList()
+    {
+        return array(
+            'users.canList'             => "List users",
+            'users.canAdd'              => "Add user",
+            'users.canEdit'             => "Edit user",
+            'users.canDelete'           => "Delete user",
+            'users.canChangePass'       => "Change user password",
+            'users.canChangeOwnPass'    => "Change own password",
+        );
+    }
+}
