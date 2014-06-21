@@ -1,6 +1,6 @@
 <?php
 
-class usersModuleController extends HqController
+class DefaultController extends HqController
 {
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -35,6 +35,12 @@ class usersModuleController extends HqController
      * Lists all models.
      */
     public function actionIndex()
+    {
+
+        $this->hqRender('index',array('menu'=>"MENU"));
+    }
+
+    public function actionTest()
     {
 
         $this->hqRender('index',array('menu'=>"MENU"));
