@@ -38,7 +38,7 @@ class DefaultController extends HqController
     {
 
         $user = new UserModel();
-        
+
         $buttons = array(
             'view'=>array(
                 'visible' => 'Yii::app()->user->checkAccess("users.canView")',
@@ -47,7 +47,7 @@ class DefaultController extends HqController
                 'visible' => 'Yii::app()->user->checkAccess("users.canUpdate")',
             ),
             'delete'=>array(
-                'visible' => 'Yii::app()->user->checkAccess("users.canDelete")',
+                'visible' => 'Yii::app()->user->checkAccess("users.canDelete") && Yii::app()->user->id !== $data->u_id',
             )
         );
 
