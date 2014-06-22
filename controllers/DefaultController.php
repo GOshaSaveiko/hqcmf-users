@@ -37,7 +37,23 @@ class DefaultController extends HqController
     public function actionIndex()
     {
 
-        $this->hqRender('index',array('menu'=>"MENU"));
+        $user = new UserModel();
+        
+        $buttons = array(
+            'view'=>array(
+                'visible' => 'Yii::app()->user->checkAccess("users.canView")',
+            ),
+            'update'=>array(
+                'visible' => 'Yii::app()->user->checkAccess("users.canUpdate")',
+            ),
+            'delete'=>array(
+                'visible' => 'Yii::app()->user->checkAccess("users.canDelete")',
+            )
+        );
+
+        $this->hqrender('index',array(
+            'user'=>$user,'buttons'=>$buttons
+        ));
     }
 
     public function actionTest()

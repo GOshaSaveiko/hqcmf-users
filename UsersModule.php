@@ -45,10 +45,19 @@ class UsersModule extends HqChildModule
         return array(
             'users.canList'             => "List users",
             'users.canAdd'              => "Add user",
-            'users.canEdit'             => "Edit user",
+            'users.canUpdate'             => "Edit user",
             'users.canDelete'           => "Delete user",
             'users.canChangePass'       => "Change user password",
             'users.canChangeOwnPass'    => "Change own password",
         );
+    }
+
+    /**
+     * Returns module version
+     * @return string
+     */
+    public function getVersion()
+    {
+        return "0.1";
     }
 }
