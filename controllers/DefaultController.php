@@ -66,10 +66,10 @@ class DefaultController extends HqController
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-
         if(isset($_POST['UserModel']))
         {
             $model->attributes=$_POST['UserModel'];
+
             if($model->save())
             {
                 Yii::app()->user->setFlash('add_ok',Hqh::mt('User %u added to database',array('%u'=>$model->u_login)));
