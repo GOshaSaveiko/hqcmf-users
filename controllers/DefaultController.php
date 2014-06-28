@@ -83,6 +83,7 @@ class DefaultController extends HqController
 
         $this->hqrender('create',array(
             'model'=>$model,
+            'roles'=>$model->getRolesList()
         ));
     }
 

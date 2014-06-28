@@ -22,6 +22,11 @@
     array(1=>'on',0=>'off'),
     array('label' => 'Switch', 'required' => true)); ?>
 
+<?php echo $form->dropDownListControlGroup($model,'u_roles',
+    $roles,
+    array('label' => 'Roles', 'help'=>'Use Ctrl button to multiple roles selection','required' => true,'multiple' => true)
+); ?>
+
 <?php echo TbHtml::formActions(array(
     TbHtml::submitButton($model->isNewRecord?'Submit':'Update', array('color' => TbHtml::BUTTON_COLOR_PRIMARY)),
     TbHtml::resetButton('Reset'),
