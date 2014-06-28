@@ -65,11 +65,12 @@ class DefaultController extends HqController
         $model=new UserModel('create');
 
         // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+        $this->performAjaxValidation($model);
 
         if(isset($_POST['UserModel']))
         {
             $model->attributes=$_POST['UserModel'];
+
             if($model->save())
             {
                 Yii::app()->user->setFlash('add_ok',Hqh::mt('User %u added to database',array('%u'=>$model->u_login)));
@@ -122,4 +123,16 @@ class DefaultController extends HqController
             throw new CHttpException(404,'The requested page does not exist.');
         return $model;
     }
+
+    /**
+     * Performs ajax validation of user
+     * @param $model
+     */
+    protected function performAjaxValidation($model) {
+        if(isset($_POST['ajax']) && $_POST['ajax']==='user-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+    }
+
 }
