@@ -81,10 +81,46 @@ class DefaultController extends HqController
             }
         }
 
+        //assign default role
+        $regkey = "user.DefaultRoleId";
+        $regval = "";
+        if(HqRegistry::check($regkey))
+            $regval = HqRegistry::read($regkey);
+
+        $model->u_roles = array($regval);
+
         $this->hqrender('create',array(
             'model'=>$model,
             'roles'=>$model->getRolesList()
         ));
+    }
+
+    /**
+     * Updates a particular model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id the ID of the model to be updated
+     */
+    public function actionUpdate($id)
+    {
+        $model=$this->loadModel($id);
+
+        if(isset($_POST['UserModel']))
+        {
+            $model->attributes=$_POST['UserModel'];
+            if($model->save())
+                $this->redirect(array('view','id'=>$model->u_id));
+        } else {
+            $model->u_pass = '';
+        }
+
+        $r_model = $model->getInstanceRelation('userRoleRelations');
+        $model->u_roles = $r_model::getUserRolesIds($model->u_id);
+
+        $this->hqrender('update',array(
+            'model'=>$model,
+            'roles'=>$model->getRolesList()
+        ));
+
     }
 
     /**
@@ -111,6 +147,7 @@ class DefaultController extends HqController
         else
             throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
     }
+
 
     /**
      * Returns the data model based on the primary key given in the GET variable.

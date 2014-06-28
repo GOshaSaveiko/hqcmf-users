@@ -13,17 +13,16 @@
     array('label' => 'Email', 'placeholder' => 'my_mail@example.com', 'required' => true)); ?>
 
 <?php echo $form->passwordFieldControlGroup($model,'u_pass',
-    array('label' => 'Password', 'placeholder' => 'Password', 'required' => true)); ?>
+    array('label' => 'Password', 'placeholder' => 'Password', 'required' => $model->isNewRecord)); ?>
 
 <?php echo $form->passwordFieldControlGroup($model,'u_pass_repeat',
-    array('label' => 'Repeat', 'placeholder' => 'Repeat Password', 'required' => true)); ?>
+    array('label' => 'Repeat', 'placeholder' => 'Repeat Password', 'required' => $model->isNewRecord)); ?>
 
 <?php echo $form->radioButtonListControlGroup($model,'u_switch',
     array(1=>'on',0=>'off'),
     array('label' => 'Switch', 'required' => true)); ?>
 
-<?php echo $form->dropDownListControlGroup($model,'u_roles',
-    $roles,
+<?php echo $form->dropDownListControlGroup($model, 'u_roles', $roles,
     array('label' => 'Roles', 'help'=>'Use Ctrl button to multiple roles selection','required' => true,'multiple' => true)
 ); ?>
 
