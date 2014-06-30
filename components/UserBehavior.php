@@ -28,6 +28,12 @@ class UserBehavior extends CActiveRecordBehavior
     public function afterSave($event)
     {
         $owner = $this->owner;
+
+        //delete previous relations
+        $urr = $owner->getInstanceRelation('userRoleRelations','delete');
+        $urr::model()->deleteAll('urr_u_id=:urr_u_id',array(':urr_u_id'=>$owner->u_id));
+
+        //make new relations
         foreach($owner->u_roles as $role_id) {
             $role = $owner->getInstanceRelation('userRoleRelations','create');
             $role->urr_u_id = $owner->u_id;
