@@ -10,9 +10,9 @@ Registry vars:
 
 Permission checks:
 ---------------------------------
-'users.canList'             => "List users",
-'users.canAdd'              => "Add user",
-'users.canUpdate'             => "Edit user",
+'users.canIndex'            => "List users",
+'users.canCreate'           => "Add user",
+'users.canUpdate'           => "Edit user",
 'users.canDelete'           => "Delete user",
 'users.canChangePass'       => "Change user password",
 'users.canChangeOwnPass'    => "Change own password",

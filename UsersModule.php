@@ -43,8 +43,8 @@ class UsersModule extends HqChildModule
     public function taskList()
     {
         return array(
-            'users.canList'             => "List users",
-            'users.canAdd'              => "Add user",
+            'users.canIndex'             => "List users",
+            'users.canCreate'              => "Add user",
             'users.canUpdate'             => "Edit user",
             'users.canDelete'           => "Delete user",
             'users.canChangePass'       => "Change user password",

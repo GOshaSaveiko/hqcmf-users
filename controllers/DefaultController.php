@@ -17,8 +17,8 @@ class DefaultController extends HqController
     {
         return array(
             array('label'=>Hqh::mt('USERS MENU')),
-            (Hqh::ca('users.canList')? array('label'=>Hqh::mt('List users'),'url'=>$this->createUrl('/hqcmf/users/index')):""),
-            (Hqh::ca('users.canAdd')? array('label'=>Hqh::mt('Add user'),'url'=>$this->createUrl('/hqcmf/users/create')):""),
+            (Hqh::ca('users.canIndex')? array('label'=>Hqh::mt('List users'),'url'=>$this->createUrl('/hqcmf/users/index')):""),
+            (Hqh::ca('users.canCreate')? array('label'=>Hqh::mt('Add user'),'url'=>$this->createUrl('/hqcmf/users/create')):""),
         );
     }
 
@@ -36,18 +36,19 @@ class DefaultController extends HqController
      */
     public function actionIndex()
     {
+        $this->pageTitle = "Users list";
 
         $user = new UserModel();
 
         $buttons = array(
             'view'=>array(
-                'visible' => 'Yii::app()->user->checkAccess("users.canView")',
+                'visible' => 'Hqh::ca("users.canView")',
             ),
             'update'=>array(
-                'visible' => 'Yii::app()->user->checkAccess("users.canUpdate")',
+                'visible' => 'Hqh::ca("users.canUpdate")',
             ),
             'delete'=>array(
-                'visible' => 'Yii::app()->user->checkAccess("users.canDelete") && Yii::app()->user->id !== $data->u_id',
+                'visible' => 'Hqh::ca("users.canDelete") && Yii::app()->user->id !== $data->u_id',
             )
         );
 
@@ -62,6 +63,8 @@ class DefaultController extends HqController
      */
     public function actionCreate()
     {
+        $this->pageTitle = "Add user";
+
         $model=new UserModel('create');
 
         // Uncomment the following line if AJAX validation is needed
@@ -104,6 +107,8 @@ class DefaultController extends HqController
     {
         $model=$this->loadModel($id);
 
+        $this->pageTitle = "Update user #".$model->u_id.' '.$model->u_login;
+
         if(isset($_POST['UserModel']))
         {
             $model->attributes=$_POST['UserModel'];
@@ -132,7 +137,7 @@ class DefaultController extends HqController
     {
         $model = $this->loadModel($id);
 
-        if(!Yii::app()->user->checkAccess('core.canDelete')  && Yii::app()->user->id !== $id)
+        if(!Hqh::ca('core.canDelete')  && Yii::app()->user->id !== $id)
             throw new CHttpException(403, 'Forbidden');
 
         if(Yii::app()->request->isPostRequest)

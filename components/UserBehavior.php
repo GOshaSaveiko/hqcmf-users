@@ -17,9 +17,9 @@ class UserBehavior extends CActiveRecordBehavior
             {
 
                 if(Yii::app()->user->id == $owner->u_id){
-                    if(!Yii::app()->user->checkAccess("users.canChangeOwnPass"))
+                    if(!Hqh::ca("users.canChangeOwnPass"))
                         throw new CHttpException(403,Hqh::mt('You have no permissions to change own password'));
-                } elseif(!Yii::app()->user->checkAccess("users.canChangePass")) {
+                } elseif(!Hqh::ca("users.canChangePass")) {
                     throw new CHttpException(403,Hqh::mt('You have no permissions to change other users password'));
                 }
 
