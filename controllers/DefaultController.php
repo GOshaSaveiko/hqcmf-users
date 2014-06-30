@@ -128,6 +128,32 @@ class DefaultController extends HqController
 
     }
 
+    public function actionView($id)
+    {
+        $model = $this->loadModel($id);
+        $roles = $model->getRoles();
+        $model->u_pass="***";
+        $this->pageTitle = "View user #".$model->u_id.' '.$model->u_login;
+
+        $buttons = array(
+            'view'=>array(
+                'visible' => 'Hqh::ca("users.canView")',
+            ),
+            'update'=>array(
+                'visible' => 'Hqh::ca("users.canUpdate")',
+            ),
+            'delete'=>array(
+                'visible' => 'Hqh::ca("users.canDelete") && Yii::app()->user->id !== $data->u_id',
+            )
+        );
+
+        $this->hqrender('view',array(
+            'model'=>$model,
+            'roles'=>$roles,
+            'buttons'=>$buttons,
+        ));
+    }
+
     /**
      * Deletes a particular model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
